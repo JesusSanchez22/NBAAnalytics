@@ -38,7 +38,7 @@
                      <Font name="Arial Black" size="15.0" />
                   </font>
                </Label>
-               <TextField fx:id="txtResultado" layoutX="62.0" layoutY="268.0" prefHeight="52.0" prefWidth="149.0" />
+               <TextField fx:id="txtResultadoJugador" alignment="CENTER" layoutX="73.0" layoutY="273.0" prefHeight="43.0" prefWidth="124.0" promptText="Jugador" text="Jugador" />
                <TableView fx:id="tablaEstadisticas" layoutX="14.0" layoutY="339.0" prefHeight="65.0" prefWidth="247.0">
                  <columns>
                    <TableColumn fx:id="columnaAsistencias" prefWidth="74.66662979125977" text="Asistencias" />
