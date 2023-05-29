@@ -39,12 +39,12 @@
                   </font>
                </Label>
                <TextField fx:id="txtResultadoJugador" alignment="CENTER" layoutX="73.0" layoutY="273.0" prefHeight="43.0" prefWidth="124.0" promptText="Jugador" text="Jugador" />
-               <TableView fx:id="tablaEstadisticas" layoutX="14.0" layoutY="339.0" prefHeight="65.0" prefWidth="247.0">
+               <TableView fx:id="tablaEstadisticas" layoutX="7.0" layoutY="339.0" prefHeight="65.0" prefWidth="262.0">
                  <columns>
                    <TableColumn fx:id="columnaAsistencias" prefWidth="74.66662979125977" text="Asistencias" />
-                   <TableColumn fx:id="columnaPuntos" prefWidth="52.66661834716797" text="Puntos" />
-                     <TableColumn fx:id="columnaTapones" prefWidth="60.0" text="Tapones" />
-                     <TableColumn fx:id="columnaRebotes" prefWidth="61.99995422363281" text="Rebotes" />
+                   <TableColumn fx:id="columnaPuntos" prefWidth="59.33330535888672" text="Puntos" />
+                     <TableColumn fx:id="columnaTapones" prefWidth="59.33331298828125" text="Tapones" />
+                     <TableColumn fx:id="columnaRebotes" prefWidth="68.00001525878906" text="Rebotes" />
                  </columns>
                </TableView>
                <Label layoutX="42.0" layoutY="411.0" prefHeight="15.0" prefWidth="191.0" textAlignment="CENTER" textFill="WHITE">

@@ -32,26 +32,26 @@
                         </image>
                     </ImageView>
                     <Button fx:id="btnMostrar" layoutX="99.0" layoutY="229.0" mnemonicParsing="false" onAction="#mostrar" prefHeight="25.0" prefWidth="75.0" text="Mostrar" />
-               <ComboBox fx:id="cbPosiciones" layoutX="63.0" layoutY="182.0" prefWidth="150.0" promptText="Elige posición" />
-               <Label layoutX="7.0" layoutY="134.0" prefHeight="25.0" prefWidth="262.0" text="Mejores jugadores por posición" textAlignment="CENTER" textFill="#0059b3">
-                  <font>
-                     <Font name="Arial Black" size="15.0" />
-                  </font>
-               </Label>
-               <TextField fx:id="txtResultadoJugador" alignment="CENTER" layoutX="73.0" layoutY="273.0" prefHeight="43.0" prefWidth="124.0" promptText="Jugador" text="Jugador" />
-               <TableView fx:id="tablaEstadisticas" layoutX="7.0" layoutY="339.0" prefHeight="65.0" prefWidth="262.0">
-                 <columns>
-                   <TableColumn fx:id="columnaAsistencias" prefWidth="74.66662979125977" text="Asistencias" />
-                   <TableColumn fx:id="columnaPuntos" prefWidth="59.33330535888672" text="Puntos" />
-                     <TableColumn fx:id="columnaTapones" prefWidth="59.33331298828125" text="Tapones" />
-                     <TableColumn fx:id="columnaRebotes" prefWidth="68.00001525878906" text="Rebotes" />
-                 </columns>
-               </TableView>
-               <Label layoutX="42.0" layoutY="411.0" prefHeight="15.0" prefWidth="191.0" textAlignment="CENTER" textFill="WHITE">
-                  <font>
-                     <Font name="Arial Black" size="10.0" />
-                  </font>
-               </Label>
+                    <ComboBox fx:id="cbPosiciones" layoutX="63.0" layoutY="182.0" prefWidth="150.0" promptText="Elige posición" />
+                    <Label layoutX="7.0" layoutY="134.0" prefHeight="25.0" prefWidth="262.0" text="Mejores jugadores por posición" textAlignment="CENTER" textFill="#0059b3">
+                        <font>
+                            <Font name="Arial Black" size="15.0" />
+                        </font>
+                    </Label>
+                    <TextField fx:id="txtResultadoJugador" alignment="CENTER" layoutX="73.0" layoutY="273.0" prefHeight="43.0" prefWidth="124.0" promptText="Jugador" text="Jugador" />
+                    <TableView fx:id="tablaEstadisticas" layoutX="7.0" layoutY="339.0" prefHeight="65.0" prefWidth="262.0">
+                        <columns>
+                            <TableColumn fx:id="columnaAsistencias" prefWidth="74.66662979125977" text="Asistencias" />
+                            <TableColumn fx:id="columnaPuntos" prefWidth="59.33330535888672" text="Puntos" />
+                            <TableColumn fx:id="columnaTapones" prefWidth="59.33331298828125" text="Tapones" />
+                            <TableColumn fx:id="columnaRebotes" prefWidth="68.00001525878906" text="Rebotes" />
+                        </columns>
+                    </TableView>
+                    <Label layoutX="42.0" layoutY="411.0" prefHeight="15.0" prefWidth="191.0" textAlignment="CENTER" textFill="WHITE">
+                        <font>
+                            <Font name="Arial Black" size="10.0" />
+                        </font>
+                    </Label>
                 </children>
             </AnchorPane>
         </children>

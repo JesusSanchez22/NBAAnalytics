@@ -7,6 +7,9 @@ public class Jugador {
     private int rebotes;
     private int tapones;
 
+    public Jugador() {
+    }
+
     public Jugador(int puntos, int asistencias, int rebotes, int tapones) {
         this.puntos = puntos;
         this.asistencias = asistencias;

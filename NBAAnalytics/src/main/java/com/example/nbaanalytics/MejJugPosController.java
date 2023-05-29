@@ -57,131 +57,34 @@ public class MejJugPosController implements Initializable{
         Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/nba?serverTimezone=UTC", "root", "toor");
         Statement stmt = conn.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE);
 
-        String sql = "SELECT * FROM usuarios";
+        String sql = "Select * from estadisticas inner join jugadores " +
+                "on estadisticas.jugador = jugadores.codigo where Posicion ='" + posicion + "'";
 
         ResultSet rs = stmt.executeQuery(sql);
 
-        switch (posicion){
-            case "pivot":
+        if(rs.next()){
+            String nombreMejorJugador = rs.getString("Nombre");
+            txtResultadoJugador.setText(nombreMejorJugador);
+        }
 
-                ResultSet mejorPivot = stmt.executeQuery("select jugadores.Nombre\n" +
-                        " from estadisticas inner join jugadores on estadisticas.jugador=jugadores.codigo where Posicion = \"C\" \n" +
-                        " group by jugadores.Nombre order by round(sum(Puntos_por_partido + Asistencias_por_partido + Tapones_por_partido + Rebotes_por_partido)/4,2) \n" +
-                        " desc limit 1;");
+        String estadisticasQuery = "Select round(sum(Puntos_por_partido)) as puntos, round(sum(Asistencias_por_partido)) as asistencias, round(sum(Tapones_por_partido))\n" +
+                "as tapones, round(sum(Rebotes_por_partido)) as rebotes\n" +
+                " from estadisticas where jugador = (select jugadores.codigo\n" +
+                " from jugadores inner join estadisticas on estadisticas.jugador=jugadores.codigo where Posicion = '" + posicion + "'" +
+                " group by jugadores.codigo order by round(sum(Puntos_por_partido + Asistencias_por_partido + Tapones_por_partido + Rebotes_por_partido)/4,2) \n" +
+                " desc limit 1);";
 
+        ResultSet estadisticasRS = stmt.executeQuery(estadisticasQuery);
 
-                if (mejorPivot.next()) {
-                    String nombreMejorPivot = mejorPivot.getString("Nombre");
-                    txtResultadoJugador.setText(nombreMejorPivot);
-                }
+        if (estadisticasRS.next()){
+            int puntos = estadisticasRS.getInt("puntos");
+            int asistencias = estadisticasRS.getInt("asistencias");
+            int tapones = estadisticasRS.getInt("tapones");
+            int rebotes = estadisticasRS.getInt("rebotes");
 
-                ResultSet puntosPivot = stmt.executeQuery("Select round(sum(Puntos_por_partido)) from estadisticas where jugador = (select jugadores.codigo\n" +
-                        " from jugadores inner join estadisticas on estadisticas.jugador=jugadores.codigo where Posicion = \"C\" \n" +
-                        " group by jugadores.codigo order by round(sum(Puntos_por_partido + Asistencias_por_partido + Tapones_por_partido + Rebotes_por_partido)/4,2) \n" +
-                        " desc limit 1);");
-                ResultSet asistenciasPivot = stmt.executeQuery(" Select round(sum(Asistencias_por_partido)) from estadisticas where jugador = (select jugadores.codigo\n" +
-                        " from jugadores inner join estadisticas on estadisticas.jugador=jugadores.codigo where Posicion = \"C\" \n" +
-                        " group by jugadores.codigo order by round(sum(Puntos_por_partido + Asistencias_por_partido + Tapones_por_partido + Rebotes_por_partido)/4,2) \n" +
-                        " desc limit 1);");
-                ResultSet rebotesPivot = stmt.executeQuery(" Select round(sum(Rebotes_por_partido)) from estadisticas where jugador = (select jugadores.codigo\n" +
-                        " from jugadores inner join estadisticas on estadisticas.jugador=jugadores.codigo where Posicion = \"C\" \n" +
-                        " group by jugadores.codigo order by round(sum(Puntos_por_partido + Asistencias_por_partido + Tapones_por_partido + Rebotes_por_partido)/4,2) \n" +
-                        " desc limit 1);");
-                ResultSet taponesPivot = stmt.executeQuery(" Select round(sum(Tapones_por_partido)) from estadisticas where jugador = (select jugadores.codigo\n" +
-                        " from jugadores inner join estadisticas on estadisticas.jugador=jugadores.codigo where Posicion = \"C\" \n" +
-                        " group by jugadores.codigo order by round(sum(Puntos_por_partido + Asistencias_por_partido + Tapones_por_partido + Rebotes_por_partido)/4,2) \n" +
-                        " desc limit 1);");
-
-                // Obtengo los datos del formulario
-                int puntos = 0;
-                int asistencias = 0;
-                int tapones = 0;
-                int rebotes = 0;
-
-                if (puntosPivot.next()) {
-                    puntos = puntosPivot.getInt(1);
-                }
-                if (asistenciasPivot.next()) {
-                    asistencias = asistenciasPivot.getInt(1);
-                }
-                if (rebotesPivot.next()) {
-                    rebotes = rebotesPivot.getInt(1);
-                }
-                if (taponesPivot.next()) {
-                    tapones = taponesPivot.getInt(1);
-                }
-
-                // Creo una persona
-                Jugador jugador1 = new Jugador(puntos,asistencias,rebotes,tapones);
-                // Lo añado a la lista
-                this.puntuaciones.add(jugador1);
-                // Seteo los items
-                this.tablaEstadisticas.setItems(puntuaciones);
-
-                break;
-
-            case "alero":
-
-                ResultSet mejorAlero = stmt.executeQuery("select jugadores.Nombre\n" +
-                        " from estadisticas inner join jugadores on estadisticas.jugador=jugadores.codigo where Posicion = \"F\" \n" +
-                        " group by jugadores.Nombre order by round(sum(Puntos_por_partido + Asistencias_por_partido + Tapones_por_partido + Rebotes_por_partido)/4,2) \n" +
-                        " desc limit 1;");
-
-
-                if (mejorAlero.next()) {
-                    String nombreMejorPivot = mejorAlero.getString("Nombre");
-                    txtResultadoJugador.setText(nombreMejorPivot);
-                }
-
-
-                break;
-
-            case "base":
-
-                ResultSet mejorBase = stmt.executeQuery("select jugadores.Nombre\n" +
-                        " from estadisticas inner join jugadores on estadisticas.jugador=jugadores.codigo where Posicion = \"G\" \n" +
-                        " group by jugadores.Nombre order by round(sum(Puntos_por_partido + Asistencias_por_partido + Tapones_por_partido + Rebotes_por_partido)/4,2) \n" +
-                        " desc limit 1;");
-
-
-                if (mejorBase.next()) {
-                    String nombreMejorPivot = mejorBase.getString("Nombre");
-                    txtResultadoJugador.setText(nombreMejorPivot);
-                }
-
-
-
-                break;
-
-            case "ala-pivot":
-                ResultSet mejorAlaPivot = stmt.executeQuery("select jugadores.Nombre\n" +
-                        " from estadisticas inner join jugadores on estadisticas.jugador=jugadores.codigo where Posicion = \"C-F\" or Posicion = \"F-C\" \n" +
-                        " group by jugadores.Nombre order by round(sum(Puntos_por_partido + Asistencias_por_partido + Tapones_por_partido + Rebotes_por_partido)/4,2) \n" +
-                        " desc limit 1;");
-
-
-                if (mejorAlaPivot.next()) {
-                    String nombreMejorPivot = mejorAlaPivot.getString("Nombre");
-                    txtResultadoJugador.setText(nombreMejorPivot);
-                }
-
-
-                break;
-
-            case "escolta":
-                ResultSet mejorEscolta = stmt.executeQuery("select jugadores.Nombre\n" +
-                        " from estadisticas inner join jugadores on estadisticas.jugador=jugadores.codigo where Posicion = \"G-F\" or Posicion = \"F-G\" \n" +
-                        " group by jugadores.Nombre order by round(sum(Puntos_por_partido + Asistencias_por_partido + Tapones_por_partido + Rebotes_por_partido)/4,2) \n" +
-                        " desc limit 1;");
-
-
-                if (mejorEscolta.next()) {
-                    String nombreMejorPivot = mejorEscolta.getString("Nombre");
-                    txtResultadoJugador.setText(nombreMejorPivot);
-                }
-
-
-                break;
+            Jugador jugador = new Jugador(puntos,asistencias,tapones,rebotes);
+            puntuaciones.clear();
+            puntuaciones.add(jugador);
         }
 
     }
@@ -200,6 +103,7 @@ public class MejJugPosController implements Initializable{
         this.columnaRebotes.setCellValueFactory(new PropertyValueFactory<>("rebotes"));
         this.columnaTapones.setCellValueFactory(new PropertyValueFactory<>("tapones"));
 
+        tablaEstadisticas.setItems(puntuaciones);
 
     }
 

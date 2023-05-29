@@ -30,8 +30,13 @@ public class VentanaIndexController {
     }
 
     @FXML
-    void goJugadas(ActionEvent event) {
-
+    void goJugadas(ActionEvent event) throws IOException {
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("MejJugEstVentana.fxml"));
+        Parent root = fxmlLoader.load();
+        Scene scene = new Scene(root);
+        Stage stage = new Stage();
+        stage.setScene(scene);
+        stage.show();
     }
 
     @FXML
