@@ -1,6 +1,7 @@
 package com.example.nbaanalytics;
 
-import javafx.beans.property.SimpleStringProperty;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -10,11 +11,12 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.control.cell.TextFieldTableCell;
 
 import java.net.URL;
 import java.sql.*;
 import java.util.ResourceBundle;
+import java.sql.ResultSet;
+import java.sql.Statement;
 
 public class MejJugPosController implements Initializable{
 
@@ -28,24 +30,24 @@ public class MejJugPosController implements Initializable{
     private ComboBox<String> cbPosiciones;
 
     @FXML
-    private TableColumn<String, String> columnaAsistencias;
+    private TableColumn<Jugador,Integer> columnaAsistencias;
 
     @FXML
-    private TableColumn<String, String> columnaPuntos;
+    private TableColumn<Jugador,Integer> columnaPuntos;
 
     @FXML
-    private TableColumn<String, String> columnaRebotes;
+    private TableColumn<Jugador,Integer> columnaRebotes;
 
     @FXML
-    private TableColumn<String, String> columnaTapones;
+    private TableColumn<Jugador,Integer> columnaTapones;
 
     @FXML
-    private TableView<String> tablaEstadisticas;
+    private TableView<Jugador> tablaEstadisticas;
 
     @FXML
     private TextField txtResultadoJugador;
 
-
+    private ObservableList<Jugador> puntuaciones;
 
     @FXML
     void mostrar(ActionEvent event) throws SQLException {
@@ -73,8 +75,48 @@ public class MejJugPosController implements Initializable{
                     txtResultadoJugador.setText(nombreMejorPivot);
                 }
 
+                ResultSet puntosPivot = stmt.executeQuery("Select round(sum(Puntos_por_partido)) from estadisticas where jugador = (select jugadores.codigo\n" +
+                        " from jugadores inner join estadisticas on estadisticas.jugador=jugadores.codigo where Posicion = \"C\" \n" +
+                        " group by jugadores.codigo order by round(sum(Puntos_por_partido + Asistencias_por_partido + Tapones_por_partido + Rebotes_por_partido)/4,2) \n" +
+                        " desc limit 1);");
+                ResultSet asistenciasPivot = stmt.executeQuery(" Select round(sum(Asistencias_por_partido)) from estadisticas where jugador = (select jugadores.codigo\n" +
+                        " from jugadores inner join estadisticas on estadisticas.jugador=jugadores.codigo where Posicion = \"C\" \n" +
+                        " group by jugadores.codigo order by round(sum(Puntos_por_partido + Asistencias_por_partido + Tapones_por_partido + Rebotes_por_partido)/4,2) \n" +
+                        " desc limit 1);");
+                ResultSet rebotesPivot = stmt.executeQuery(" Select round(sum(Rebotes_por_partido)) from estadisticas where jugador = (select jugadores.codigo\n" +
+                        " from jugadores inner join estadisticas on estadisticas.jugador=jugadores.codigo where Posicion = \"C\" \n" +
+                        " group by jugadores.codigo order by round(sum(Puntos_por_partido + Asistencias_por_partido + Tapones_por_partido + Rebotes_por_partido)/4,2) \n" +
+                        " desc limit 1);");
+                ResultSet taponesPivot = stmt.executeQuery(" Select round(sum(Tapones_por_partido)) from estadisticas where jugador = (select jugadores.codigo\n" +
+                        " from jugadores inner join estadisticas on estadisticas.jugador=jugadores.codigo where Posicion = \"C\" \n" +
+                        " group by jugadores.codigo order by round(sum(Puntos_por_partido + Asistencias_por_partido + Tapones_por_partido + Rebotes_por_partido)/4,2) \n" +
+                        " desc limit 1);");
 
-                mejorPivot.close();
+                // Obtengo los datos del formulario
+                int puntos = 0;
+                int asistencias = 0;
+                int tapones = 0;
+                int rebotes = 0;
+
+                if (puntosPivot.next()) {
+                    puntos = puntosPivot.getInt(1);
+                }
+                if (asistenciasPivot.next()) {
+                    asistencias = asistenciasPivot.getInt(1);
+                }
+                if (rebotesPivot.next()) {
+                    rebotes = rebotesPivot.getInt(1);
+                }
+                if (taponesPivot.next()) {
+                    tapones = taponesPivot.getInt(1);
+                }
+
+                // Creo una persona
+                Jugador jugador1 = new Jugador(puntos,asistencias,rebotes,tapones);
+                // Lo añado a la lista
+                this.puntuaciones.add(jugador1);
+                // Seteo los items
+                this.tablaEstadisticas.setItems(puntuaciones);
 
                 break;
 
@@ -91,7 +133,7 @@ public class MejJugPosController implements Initializable{
                     txtResultadoJugador.setText(nombreMejorPivot);
                 }
 
-                mejorAlero.close();
+
                 break;
 
             case "base":
@@ -107,7 +149,7 @@ public class MejJugPosController implements Initializable{
                     txtResultadoJugador.setText(nombreMejorPivot);
                 }
 
-                mejorBase.close();
+
 
                 break;
 
@@ -123,7 +165,7 @@ public class MejJugPosController implements Initializable{
                     txtResultadoJugador.setText(nombreMejorPivot);
                 }
 
-                mejorAlaPivot.close();
+
                 break;
 
             case "escolta":
@@ -138,12 +180,9 @@ public class MejJugPosController implements Initializable{
                     txtResultadoJugador.setText(nombreMejorPivot);
                 }
 
-                mejorEscolta.close();
+
                 break;
         }
-
-
-
 
     }
 
@@ -153,6 +192,13 @@ public class MejJugPosController implements Initializable{
 
         cbPosiciones.setValue("Elige posición");
 
+
+        puntuaciones = FXCollections.observableArrayList();
+
+        this.columnaPuntos.setCellValueFactory(new PropertyValueFactory<>("puntos"));
+        this.columnaAsistencias.setCellValueFactory(new PropertyValueFactory<>("asistencias"));
+        this.columnaRebotes.setCellValueFactory(new PropertyValueFactory<>("rebotes"));
+        this.columnaTapones.setCellValueFactory(new PropertyValueFactory<>("tapones"));
 
 
     }
