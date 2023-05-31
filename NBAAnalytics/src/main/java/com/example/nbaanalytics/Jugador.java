@@ -2,6 +2,9 @@ package com.example.nbaanalytics;
 
 public class Jugador {
 
+    private String nombre;
+
+    private String temporada;
     private int puntos;
     private int asistencias;
     private int rebotes;
@@ -15,6 +18,31 @@ public class Jugador {
         this.asistencias = asistencias;
         this.rebotes = rebotes;
         this.tapones = tapones;
+    }
+
+    public Jugador(String temporada, String nombre, int puntos, int asistencias, int rebotes, int tapones) {
+        this.nombre = nombre;
+        this.temporada = temporada;
+        this.puntos = puntos;
+        this.asistencias = asistencias;
+        this.rebotes = rebotes;
+        this.tapones = tapones;
+    }
+
+    public String getNombre() {
+        return nombre;
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+
+    public String getTemporada() {
+        return temporada;
+    }
+
+    public void setTemporada(String temporada) {
+        this.temporada = temporada;
     }
 
     public int getPuntos() {

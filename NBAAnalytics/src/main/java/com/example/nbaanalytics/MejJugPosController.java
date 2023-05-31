@@ -105,6 +105,7 @@ public class MejJugPosController implements Initializable{
 
         tablaEstadisticas.setItems(puntuaciones);
 
+
     }
 
 }

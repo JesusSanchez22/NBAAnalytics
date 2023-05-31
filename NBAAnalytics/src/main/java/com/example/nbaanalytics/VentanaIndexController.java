@@ -25,8 +25,13 @@ public class VentanaIndexController {
     private Button btnResultados;
 
     @FXML
-    void goEquipos(ActionEvent event) {
-
+    void goEquipos(ActionEvent event) throws IOException {
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("EquiposVentana.fxml"));
+        Parent root = fxmlLoader.load();
+        Scene scene = new Scene(root);
+        Stage stage = new Stage();
+        stage.setScene(scene);
+        stage.show();
     }
 
     @FXML

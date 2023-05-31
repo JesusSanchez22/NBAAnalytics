@@ -6,7 +6,6 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
-<?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -38,13 +37,14 @@
                             <Font name="Arial Black" size="15.0" />
                         </font>
                     </Label>
-                    <TextField fx:id="txtResultadoJugador" alignment="CENTER" layoutX="73.0" layoutY="273.0" prefHeight="43.0" prefWidth="124.0" promptText="Jugador" text="Jugador" />
-                    <TableView fx:id="tablaEstadisticas" layoutX="14.0" layoutY="339.0" prefHeight="65.0" prefWidth="247.0">
+                    <TableView fx:id="tablaEstadisticas" layoutX="14.0" layoutY="270.0" prefHeight="163.0" prefWidth="247.0">
                         <columns>
-                            <TableColumn fx:id="columnaAsistencias" prefWidth="74.66662979125977" text="Asistencias" />
-                            <TableColumn fx:id="columnaPuntos" prefWidth="52.66661834716797" text="Puntos" />
-                            <TableColumn fx:id="columnaTapones" prefWidth="60.0" text="Tapones" />
-                            <TableColumn fx:id="columnaRebotes" prefWidth="61.99995422363281" text="Rebotes" />
+                     <TableColumn fx:id="columnaTemporada" prefWidth="36.66668701171875" text="Temporada" />
+                     <TableColumn fx:id="columnaNombre" prefWidth="61.33331298828125" text="Nombre" />
+                            <TableColumn fx:id="columnaPuntos" prefWidth="37.99993896484375" text="Puntos" />
+                            <TableColumn fx:id="columnaAsistencias" prefWidth="36.666656494140625" text="Asistencias" />
+                            <TableColumn fx:id="columnaTapones" prefWidth="35.99993896484375" text="Tapones" />
+                            <TableColumn fx:id="columnaRebotes" minWidth="6.66668701171875" prefWidth="36.00006103515625" text="Rebotes" />
                         </columns>
                     </TableView>
                     <Label layoutX="42.0" layoutY="411.0" prefHeight="15.0" prefWidth="191.0" textAlignment="CENTER" textFill="WHITE">
