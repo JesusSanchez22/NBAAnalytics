@@ -29,8 +29,13 @@ public class adminIndexController {
     }
 
     @FXML
-    void goJugadores(ActionEvent event) {
-
+    void goJugadores(ActionEvent event) throws IOException {
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("AdminJugadoresVentana.fxml"));
+        Parent root = fxmlLoader.load();
+        Scene scene = new Scene(root);
+        Stage stage = new Stage();
+        stage.setScene(scene);
+        stage.show();
     }
 
 }

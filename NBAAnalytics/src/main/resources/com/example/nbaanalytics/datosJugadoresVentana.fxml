@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<VBox alignment="CENTER" prefHeight="445.0" prefWidth="280.0" spacing="20.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.nbaanalytics.datosJugadores">
+    <padding>
+        <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+    </padding>
+    <AnchorPane prefHeight="469.0" prefWidth="250.0">
+        <children>
+            <AnchorPane layoutY="-1.0">
+                <children>
+                    <ImageView fitHeight="489.0" fitWidth="299.0" layoutY="-3.0" pickOnBounds="true" preserveRatio="true">
+                        <image>
+                            <Image url="@../../../images/fondo.jpg" />
+                        </image>
+                    </ImageView>
+                    <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="60.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
+                        <image>
+                            <Image url="@../../../images/logoNBA.png" />
+                        </image>
+                    </ImageView>
+                    <Label layoutX="24.0" layoutY="143.0" prefHeight="25.0" prefWidth="221.0" text="Información de Jugadores" textAlignment="CENTER" textFill="#0059b3">
+                        <font>
+                            <Font name="Arial Black" size="15.0" />
+                        </font>
+                    </Label>
+                    <TableView fx:id="tablaInfo" layoutX="7.0" layoutY="183.0" prefHeight="267.0" prefWidth="262.0">
+                        <columns>
+                     <TableColumn fx:id="columnaCodigo" prefWidth="27.999998092651367" text="cod" />
+                            <TableColumn fx:id="columnaNombre" prefWidth="53.333316802978516" text="Nom" />
+                            <TableColumn fx:id="columnaProcedencia" prefWidth="32.66674041748047" text="Proc" />
+                            <TableColumn fx:id="columnaAltura" minWidth="0.0" prefWidth="27.99993896484375" text="Alt" />
+                            <TableColumn fx:id="columnaPeso" prefWidth="36.6666259765625" text="Peso" />
+                     <TableColumn fx:id="columnaPosicion" prefWidth="39.3333740234375" text="Pos" />
+                     <TableColumn fx:id="columnaEquipo" prefWidth="42.66667175292969" text="Equipo" />
+                        </columns>
+                    </TableView>
+                    <Label layoutX="42.0" layoutY="411.0" prefHeight="15.0" prefWidth="191.0" textAlignment="CENTER" textFill="WHITE">
+                        <font>
+                            <Font name="Arial Black" size="10.0" />
+                        </font>
+                    </Label>
+                </children>
+            </AnchorPane>
+        </children>
+    </AnchorPane>
+</VBox>

@@ -28,13 +28,13 @@
                             <Image url="@../../../images/logoNBA.png" />
                         </image>
                     </ImageView>
-                    <Button fx:id="btnBorrar" layoutX="13.0" layoutY="164.0" mnemonicParsing="false" onAction="#borrar" prefHeight="25.0" prefWidth="80.0" text="Borrar" textFill="#0059b3">
+                    <Button fx:id="btnBorrar" layoutX="13.0" layoutY="188.0" mnemonicParsing="false" onAction="#borrar" prefHeight="25.0" prefWidth="80.0" text="Borrar" textFill="#0059b3">
                         <font>
                             <Font name="Arial Black" size="12.0" />
                         </font>
                     </Button>
-               <TextField fx:id="txtNombreEquipo" layoutX="107.0" layoutY="164.0" promptText="nombreEquipo" />
-               <Button fx:id="btnBorrar1" layoutX="13.0" layoutY="229.0" mnemonicParsing="false" onAction="#insertar" prefHeight="25.0" prefWidth="80.0" text="Insetar" textFill="#0059b3">
+               <TextField fx:id="txtRegistro" layoutX="107.0" layoutY="189.0" promptText="Nombre_equipo" />
+               <Button fx:id="btnInsertar" layoutX="13.0" layoutY="229.0" mnemonicParsing="false" onAction="#insertar" prefHeight="25.0" prefWidth="80.0" text="Insetar" textFill="#0059b3">
                   <font>
                      <Font name="Arial Black" size="12.0" />
                   </font>
@@ -43,13 +43,19 @@
                <TextField fx:id="txtCiudad" layoutX="107.0" layoutY="263.0" promptText="ciudad" />
                <TextField fx:id="txtConferencia" layoutX="107.0" layoutY="298.0" promptText="conferencia" />
                <TextField fx:id="txtDivision" layoutX="107.0" layoutY="330.0" promptText="division" />
-               <Button fx:id="btnBorrar2" layoutX="8.0" layoutY="372.0" mnemonicParsing="false" onAction="#actualizar" prefHeight="25.0" prefWidth="88.0" text="Actualizar" textFill="#0059b3">
+               <Button fx:id="btnActualizar" layoutX="8.0" layoutY="372.0" mnemonicParsing="false" onAction="#actualizar" prefHeight="25.0" prefWidth="88.0" text="Actualizar" textFill="#0059b3">
                   <font>
                      <Font name="Arial Black" size="12.0" />
                   </font>
                </Button>
-               <ComboBox fx:id="cbCampo" layoutX="107.0" layoutY="372.0" prefWidth="150.0" promptText="Campo" />
-               <TextField fx:id="txtCampoACambiar" layoutX="108.0" layoutY="410.0" promptText="CampoACambiar" />
+               <ComboBox fx:id="cbCampo" layoutX="108.0" layoutY="405.0" prefWidth="150.0" promptText="Campo" />
+               <TextField fx:id="txtCampoACambiar" layoutX="108.0" layoutY="440.0" promptText="CampoACambiar" />
+               <Button fx:id="btnDatos" layoutX="82.0" layoutY="138.0" mnemonicParsing="false" onAction="#goDatos" prefHeight="25.0" prefWidth="109.0" text="Datos" textFill="#0059b3">
+                  <font>
+                     <Font name="Arial Black" size="12.0" />
+                  </font>
+               </Button>
+               <TextField fx:id="txtRegistro2" layoutX="108.0" layoutY="372.0" prefHeight="25.0" prefWidth="150.0" promptText="Nombre_equipo" />
                 </children>
             </AnchorPane>
         </children>
