@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<VBox alignment="CENTER" prefHeight="445.0" prefWidth="280.0" spacing="20.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.nbaanalytics.VentanaEquiposController">
+    <padding>
+        <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+    </padding>
+    <AnchorPane prefHeight="469.0" prefWidth="250.0">
+        <children>
+            <AnchorPane layoutY="-1.0">
+                <children>
+                    <ImageView fitHeight="489.0" fitWidth="299.0" layoutY="-3.0" pickOnBounds="true" preserveRatio="true">
+                        <image>
+                            <Image url="@../../../images/fondo.jpg" />
+                        </image>
+                    </ImageView>
+                    <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="60.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
+                        <image>
+                            <Image url="@../../../images/logoNBA.png" />
+                        </image>
+                    </ImageView>
+                    <Label layoutX="35.0" layoutY="129.0" prefHeight="25.0" prefWidth="205.0" text="Información de equipos" textAlignment="CENTER" textFill="#0059b3">
+                        <font>
+                            <Font name="Arial Black" size="15.0" />
+                        </font>
+                    </Label>
+                    <TableView fx:id="tablaInfo" layoutX="7.0" layoutY="166.0" prefHeight="205.0" prefWidth="262.0">
+                        <columns>
+                            <TableColumn fx:id="columnaNombre" prefWidth="57.33337593078613" text="Nombre" />
+                            <TableColumn fx:id="columnaCiudad" prefWidth="57.99999237060547" text="Ciudad" />
+                            <TableColumn fx:id="columnaConferencia" prefWidth="78.66668701171875" text="Conferencia" />
+                            <TableColumn fx:id="columnaDivision" prefWidth="68.00001525878906" text="Division" />
+                        </columns>
+                    </TableView>
+                    <Label layoutX="42.0" layoutY="411.0" prefHeight="15.0" prefWidth="191.0" textAlignment="CENTER" textFill="WHITE">
+                        <font>
+                            <Font name="Arial Black" size="10.0" />
+                        </font>
+                    </Label>
+               <TextField fx:id="txtRuta" alignment="CENTER" layoutX="61.0" layoutY="394.0" promptText="ruta" />
+               <Button fx:id="btnImprimir" layoutX="74.0" layoutY="430.0" mnemonicParsing="false" onAction="#imprimir" text="Imprimir información" />
+                </children>
+            </AnchorPane>
+        </children>
+    </AnchorPane>
+</VBox>
