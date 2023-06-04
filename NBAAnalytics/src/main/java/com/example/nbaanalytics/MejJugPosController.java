@@ -47,40 +47,49 @@ public class MejJugPosController implements Initializable{
     @FXML
     private TextField txtResultadoJugador;
 
+    @FXML
+    private TextField txtTemporada;
+
     private ObservableList<Jugador> puntuaciones;
 
     @FXML
     void mostrar(ActionEvent event) throws SQLException {
+
+        puntuaciones.clear();
 
         String posicion = cbPosiciones.getValue();
 
         Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/nba?serverTimezone=UTC", "root", "toor");
         Statement stmt = conn.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE);
 
-        String sql = "Select * from estadisticas inner join jugadores " +
-                "on estadisticas.jugador = jugadores.codigo where Posicion ='" + posicion + "'";
+        String sql = "Select temporada,nombre,\n" +
+                "    round((Puntos_por_partido + Asistencias_por_partido + Tapones_por_partido + Rebotes_por_partido)) as puntuacion\n" +
+                "    from estadisticas inner join jugadores on estadisticas.jugador=jugadores.codigo \n" +
+                "    where posicion='"+ posicion + "' order by puntuacion desc limit 1;";
 
         ResultSet rs = stmt.executeQuery(sql);
 
+        String nombreMejorJugador = "";
+        String temporada = "";
+
         if(rs.next()){
-            String nombreMejorJugador = rs.getString("Nombre");
+            nombreMejorJugador = rs.getString("Nombre");
+            temporada = rs.getString("temporada");
             txtResultadoJugador.setText(nombreMejorJugador);
+            txtTemporada.setText(temporada);
         }
 
-        String estadisticasQuery = "Select round(sum(Puntos_por_partido)) as puntos, round(sum(Asistencias_por_partido)) as asistencias, round(sum(Tapones_por_partido))\n" +
-                "as tapones, round(sum(Rebotes_por_partido)) as rebotes\n" +
-                " from estadisticas where jugador = (select jugadores.codigo\n" +
-                " from jugadores inner join estadisticas on estadisticas.jugador=jugadores.codigo where Posicion = '" + posicion + "'" +
-                " group by jugadores.codigo order by round(sum(Puntos_por_partido + Asistencias_por_partido + Tapones_por_partido + Rebotes_por_partido)/4,2) \n" +
-                " desc limit 1);";
+        String estadisticasQuery = "Select puntos_por_partido, asistencias_por_partido, tapones_por_partido, rebotes_por_partido \n" +
+                "    from estadisticas inner join jugadores on estadisticas.jugador=jugadores.codigo \n" +
+                "    where nombre='" + nombreMejorJugador + "' and temporada='" + temporada + "';";
 
         ResultSet estadisticasRS = stmt.executeQuery(estadisticasQuery);
 
         if (estadisticasRS.next()){
-            int puntos = estadisticasRS.getInt("puntos");
-            int asistencias = estadisticasRS.getInt("asistencias");
-            int tapones = estadisticasRS.getInt("tapones");
-            int rebotes = estadisticasRS.getInt("rebotes");
+            int puntos = estadisticasRS.getInt("puntos_por_partido");
+            int asistencias = estadisticasRS.getInt("asistencias_por_partido");
+            int tapones = estadisticasRS.getInt("tapones_por_partido");
+            int rebotes = estadisticasRS.getInt("rebotes_por_partido");
 
             Jugador jugador = new Jugador(puntos,asistencias,tapones,rebotes);
             puntuaciones.clear();

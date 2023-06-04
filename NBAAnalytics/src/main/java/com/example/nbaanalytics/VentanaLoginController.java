@@ -47,43 +47,53 @@ public class VentanaLoginController {
 
             boolean usuarioExistente = false;
 
-            while (rs.next()) {
-                String siguienteNombre = rs.getString("Nombre");
+            if (nombre.equals("admin") && password.equals("admin")){
+                FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("adminIndexVentana.fxml"));
+                Parent root = fxmlLoader.load();
+                Scene scene = new Scene(root);
+                Stage stage = new Stage();
+                stage.setScene(scene);
+                stage.show();
+            }else {
 
-                if (nombre.equals(siguienteNombre)) {
-                    usuarioExistente = true;
-                    break;
-                }
-            }
+                while (rs.next()) {
+                    String siguienteNombre = rs.getString("Nombre");
 
-            if (usuarioExistente) {
-
-                ResultSet rs2 = stmt.executeQuery("SELECT Contraseña FROM usuarios WHERE Nombre='" + nombre + "'");
-                if (rs2.next()) {
-                    String comprobarContraseña = rs2.getString("Contraseña");
-
-                    if (password.equals(comprobarContraseña)) {
-                        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("IndexVentana.fxml"));
-                        Parent root = fxmlLoader.load();
-                        Scene scene = new Scene(root);
-                        Stage stage = new Stage();
-                        stage.setScene(scene);
-                        stage.show();
-                    } else {
-                        Alert alert = new Alert(Alert.AlertType.INFORMATION);
-                        alert.setTitle("Error 404");
-                        alert.setContentText("La contraseña es incorrecta");
-                        alert.showAndWait();
+                    if (nombre.equals(siguienteNombre)) {
+                        usuarioExistente = true;
+                        break;
                     }
                 }
 
-            } else {
-                Alert alert = new Alert(Alert.AlertType.INFORMATION);
-                alert.setTitle("Error 404");
-                alert.setContentText("Este usuario no existe");
-                alert.showAndWait();
-            }
+                if (usuarioExistente) {
 
+                    ResultSet rs2 = stmt.executeQuery("SELECT Contraseña FROM usuarios WHERE Nombre='" + nombre + "'");
+                    if (rs2.next()) {
+                        String comprobarContraseña = rs2.getString("Contraseña");
+
+                        if (password.equals(comprobarContraseña)) {
+
+                            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("IndexVentana.fxml"));
+                            Parent root = fxmlLoader.load();
+                            Scene scene = new Scene(root);
+                            Stage stage = new Stage();
+                            stage.setScene(scene);
+                            stage.show();
+                        } else {
+                            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                            alert.setTitle("Error 404");
+                            alert.setContentText("La contraseña es incorrecta");
+                            alert.showAndWait();
+                        }
+                    }
+
+                } else {
+                    Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                    alert.setTitle("Error 404");
+                    alert.setContentText("Este usuario no existe");
+                    alert.showAndWait();
+                }
+            }
         } catch (SQLException e) {
         } catch (IOException e) {
         }

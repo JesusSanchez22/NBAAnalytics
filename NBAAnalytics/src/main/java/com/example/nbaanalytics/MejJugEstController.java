@@ -5,11 +5,7 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Button;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 
 import java.net.URL;
@@ -18,7 +14,7 @@ import java.util.ResourceBundle;
 
 public class MejJugEstController implements Initializable{
 
-    private String[] posiciones = {"Mejor_anotador","Mejor_asistente","Mejor_rebotador","Mejor_taponador"};
+    private String[] posiciones = {"Mejor_anotador","Mejor_asistente","Mejor_rebotador","Mejor_taponeador"};
 
 
     @FXML
@@ -53,17 +49,21 @@ public class MejJugEstController implements Initializable{
     @FXML
     void mostrar(ActionEvent event) throws SQLException {
 
+        puntuaciones.clear();
+
         String posicion = cbPosiciones.getValue();
 
         Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/nba?serverTimezone=UTC", "root", "toor");
         Statement stmt = conn.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE);
 
 
-
         String estadisticasQuery = "Select temporada, (Select nombre from jugadores where codigo = " + posicion + ") as nombre, round(sum(Puntos_por_partido)) as puntos, \n" +
                 "                round(sum(Asistencias_por_partido)) as asistencias, round(sum(Tapones_por_partido))\n" +
                 "\t\t\t\tas tapones, round(sum(Rebotes_por_partido)) as rebotes\n" +
-                " from estadisticas natural join mejores_jugadores group by Temporada," + posicion + " limit 7;";
+                " from estadisticas natural join mejores_jugadores " +
+                "where jugador = " + posicion + " " +
+                "group by Temporada," + posicion + ";";
+
 
 
         ResultSet estadisticasRS = stmt.executeQuery(estadisticasQuery);

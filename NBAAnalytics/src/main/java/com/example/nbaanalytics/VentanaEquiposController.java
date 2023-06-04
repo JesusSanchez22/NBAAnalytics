@@ -5,10 +5,7 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Button;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 
 import java.io.File;
@@ -54,19 +51,29 @@ public class VentanaEquiposController implements Initializable {
         ResultSet rs = stmt.executeQuery(sql);
         String ruta = txtRuta.getText();
 
+        if (ruta.isEmpty()){
 
-        File f = new File(ruta);
+                Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                alert.setTitle("Error 404");
+                alert.setContentText("La ruta está vacía o es incorrecta");
+                alert.showAndWait();
 
-        FileWriter writer = new FileWriter(f);
+        }else{
+            File f = new File(ruta);
 
-        do {
-            writer.write(columnaNombre.getCellData(1) + " " + columnaCiudad.getCellData(2) +
-                   " " + columnaConferencia.getCellData(3) + " " + columnaDivision.getCellData(4) +
-                    "\n");
-            rs.next();
-        }while(rs.next());
+            FileWriter writer = new FileWriter(f);
 
-        writer.close();
+            for (Equipo equipo : infoEquipos) {
+                writer.write(equipo.getNombre() + " " + equipo.getCiudad() +
+                        " " + equipo.getConferencia() + " " + equipo.getDivision() +
+                        "\n");
+            }
+
+            writer.close();
+        }
+
+
+
     }
 
     @Override

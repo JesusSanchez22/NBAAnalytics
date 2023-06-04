@@ -31,15 +31,15 @@
                             <Image url="@../../../images/logoNBA.png" />
                         </image>
                     </ImageView>
-                    <Button fx:id="btnMostrar" layoutX="99.0" layoutY="229.0" mnemonicParsing="false" onAction="#mostrar" prefHeight="25.0" prefWidth="75.0" text="Mostrar" />
+                    <Button fx:id="btnMostrar" layoutX="99.0" layoutY="225.0" mnemonicParsing="false" onAction="#mostrar" prefHeight="25.0" prefWidth="75.0" text="Mostrar" />
                <ComboBox fx:id="cbPosiciones" layoutX="63.0" layoutY="182.0" prefWidth="150.0" promptText="Elige posición" />
                <Label layoutX="7.0" layoutY="134.0" prefHeight="25.0" prefWidth="262.0" text="Mejores jugadores por posición" textAlignment="CENTER" textFill="#0059b3">
                   <font>
                      <Font name="Arial Black" size="15.0" />
                   </font>
                </Label>
-               <TextField fx:id="txtResultadoJugador" alignment="CENTER" layoutX="73.0" layoutY="273.0" prefHeight="43.0" prefWidth="124.0" promptText="Jugador" text="Jugador" />
-               <TableView fx:id="tablaEstadisticas" layoutX="7.0" layoutY="339.0" prefHeight="65.0" prefWidth="262.0">
+               <TextField fx:id="txtResultadoJugador" layoutX="42.0" layoutY="272.0" prefHeight="43.0" prefWidth="83.0" promptText="Jugador" text="Jugador" />
+               <TableView fx:id="tablaEstadisticas" layoutX="7.0" layoutY="362.0" prefHeight="65.0" prefWidth="262.0">
                  <columns>
                    <TableColumn fx:id="columnaAsistencias" prefWidth="74.66662979125977" text="Asistencias" />
                    <TableColumn fx:id="columnaPuntos" prefWidth="59.33330535888672" text="Puntos" />
@@ -52,6 +52,12 @@
                      <Font name="Arial Black" size="10.0" />
                   </font>
                </Label>
+               <Label layoutX="39.0" layoutY="335.0" text="Estadisticas por partido" textFill="#0059b3">
+                  <font>
+                     <Font name="Arial Black" size="15.0" />
+                  </font>
+               </Label>
+               <TextField fx:id="txtTemporada" alignment="CENTER" layoutX="147.0" layoutY="272.0" prefHeight="43.0" prefWidth="83.0" promptText="Temporada" text="Temporada" />
                 </children>
             </AnchorPane>
         </children>
