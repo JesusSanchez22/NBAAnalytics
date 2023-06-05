@@ -26,6 +26,14 @@ public class VentanaRegisterController {
         String nombre = txtUser.getText();
         String password = txtPassword.getText();
 
+        if (nombre.isEmpty() || password.isEmpty()) {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Error");
+            alert.setContentText("Por favor, ingrese un nombre de usuario y una contraseña válidos");
+            alert.showAndWait();
+            return;
+        }
+
         try {
             Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/nba?serverTimezone=UTC", "root", "toor");
             Statement stmt = conn.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE);

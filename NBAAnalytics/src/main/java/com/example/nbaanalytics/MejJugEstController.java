@@ -53,6 +53,14 @@ public class MejJugEstController implements Initializable{
 
         String posicion = cbPosiciones.getValue();
 
+        if (posicion.equals("Elige estadística")) {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Error");
+            alert.setContentText("Por favor, selecciona una estadística");
+            alert.showAndWait();
+            return;
+        }
+
         Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/nba?serverTimezone=UTC", "root", "toor");
         Statement stmt = conn.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE);
 

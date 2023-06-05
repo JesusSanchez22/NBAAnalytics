@@ -51,7 +51,7 @@
                             <Font name="Arial Black" size="10.0" />
                         </font>
                     </Label>
-                    <Label layoutX="77.0" layoutY="146.0" prefHeight="25.0" prefWidth="125.0" text="de los equipos" textAlignment="CENTER" textFill="#0059b3">
+                    <Label layoutX="73.0" layoutY="146.0" prefHeight="25.0" prefWidth="125.0" text="de los partidos" textAlignment="CENTER" textFill="#0059b3">
                         <font>
                             <Font name="Arial Black" size="15.0" />
                         </font>

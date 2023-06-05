@@ -48,7 +48,7 @@ public class VentanaLoginController {
             boolean usuarioExistente = false;
 
             if (nombre.equals("admin") && password.equals("admin")){
-                FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("adminIndexVentana.fxml"));
+                FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("AdminIndexVentana.fxml"));
                 Parent root = fxmlLoader.load();
                 Scene scene = new Scene(root);
                 Stage stage = new Stage();
